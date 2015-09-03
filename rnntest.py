@@ -47,5 +47,11 @@ if __name__ == '__main__':
 	svocsize = len(sourcedict)
 	tvocsize = len(targetdict)
 
-	rnn = rnnmodel()
+	rng = numpy.random.RandomState(23455)
+	rnn = rnnmodel(rng, svocsize, tvocsize, 100)
 
+	for epoch in range(0, 200):
+		print epoch
+		for i in range(0, nsentence):
+			rnn.train(train_input[i], train_output[i], len(train_input))
+		print rnn.predict(train_input[0])
